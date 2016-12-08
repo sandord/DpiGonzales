@@ -8,7 +8,7 @@ namespace DpiGonzales.Win32Helpers
     {
         public static IntPtr GetDisplayHandleFromPoint(Point point)
         {
-            return MonitorFromPoint(new PointStruct(point), MonitorOptions.DefaultToNull);
+            return MonitorFromPoint(new Win32Point(point), MonitorOptions.DefaultToNull);
         }
 
         public static int? GetDpiForDisplay(IntPtr hmonitor)
@@ -25,10 +25,10 @@ namespace DpiGonzales.Win32Helpers
         }
 
         [DllImport("User32.dll")]
-        private static extern IntPtr MonitorFromPoint(PointStruct pt, MonitorOptions dwFlags);
+        private static extern IntPtr MonitorFromPoint(Win32Point pt, MonitorOptions dwFlags);
 
         [DllImport("Shcore.dll")]
-        private static extern IntPtr GetDpiForMonitor([In]IntPtr hmonitor, [In]DpiType dpiType, [Out]out uint dpiX, [Out]out uint dpiY);
+        private static extern IntPtr GetDpiForMonitor(IntPtr hmonitor, DpiType dpiType, out uint dpiX, out uint dpiY);
         
         [Flags]
         private enum MonitorOptions
@@ -36,31 +36,6 @@ namespace DpiGonzales.Win32Helpers
             DefaultToNull = 0,
             DefaultToPrimary = 1,
             DefaultToNearest = 2,
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        private struct PointStruct
-        {
-            public int X;
-            public int Y;
-
-            public PointStruct(int x, int y)
-            {
-                X = x;
-                Y = y;
-            }
-
-            public PointStruct(Point pt) : this((int)pt.X, (int)pt.Y) { }
-
-            public static implicit operator Point(PointStruct p)
-            {
-                return new Point(p.X, p.Y);
-            }
-
-            public static implicit operator PointStruct(Point p)
-            {
-                return new PointStruct((int)p.X, (int)p.Y);
-            }
         }
 
         private enum DpiType

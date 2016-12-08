@@ -8,11 +8,13 @@ namespace DpiGonzales
 {
     public partial class App : Application
     {
-        private const int RefreshRate = 60;
-        private const float ReferenceDpi = 96f;
-        private const int MinMouseSpeed = 0;
-        private const int MaxMouseSpeed = 20;
-        private const float DpiMouseSpeedFactor = 1 / 16f; // Increment mouse speed for every 16 dots above the reference dpi.
+        private const float WindowsReferenceDpi = 96f;
+        private const int WindowsMinMouseSpeed = 0;
+        private const int WindowsMaxMouseSpeed = 20;
+
+        // TODO: make these configurable.
+        private int RefreshRate = 60;
+        private float MouseSpeedToDisplayDpiRatio = 1 / 16f; // Increment mouse speed for every 16 dots above the reference dpi.
 
         private TaskbarIcon _notifyIcon;
         private int _systemMouseSpeed;
@@ -58,17 +60,14 @@ namespace DpiGonzales
             {
                 _currentDisplay = displayHandle;
 
-                var displayDpi = DisplayHelper.GetDpiForDisplay(displayHandle) ?? ReferenceDpi;
-                var mouseSpeed = (int)Math.Floor(_systemMouseSpeed + (displayDpi - ReferenceDpi) * DpiMouseSpeedFactor);
-                mouseSpeed = Math.Min(Math.Max(mouseSpeed, MinMouseSpeed), MaxMouseSpeed);
+                var displayDpi = DisplayHelper.GetDpiForDisplay(displayHandle) ?? WindowsReferenceDpi;
+                var mouseSpeed = (int)Math.Floor(_systemMouseSpeed + (displayDpi - WindowsReferenceDpi) * MouseSpeedToDisplayDpiRatio);
+                mouseSpeed = Math.Min(Math.Max(mouseSpeed, WindowsMinMouseSpeed), WindowsMaxMouseSpeed);
 
                 // Use even values only, just like Windows Mouse Properties does.
                 mouseSpeed = (mouseSpeed / 2) * 2;
 
                 MouseHelper.SetMouseSpeed(mouseSpeed);
-#if DEBUG
-                System.Diagnostics.Debug.WriteLine(mouseSpeed);
-#endif
             }
         }
 

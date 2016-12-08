@@ -10,6 +10,7 @@ namespace DpiGonzales.Win32Helpers
         {
             var w32Mouse = new Win32Point();
             GetCursorPos(ref w32Mouse);
+
             return new Point(w32Mouse.X, w32Mouse.Y);
         }
 
@@ -31,6 +32,9 @@ namespace DpiGonzales.Win32Helpers
             {
                 throw new InvalidOperationException("Failed to restore system mouse speed.");
             }
+#if DEBUG
+            System.Diagnostics.Debug.WriteLine($"Changed mouse speed to {mouseSpeed}");
+#endif
         }
 
         [DllImport("User32.dll")]
@@ -47,12 +51,5 @@ namespace DpiGonzales.Win32Helpers
             GetMousespeed = 0x0070,
             SetMousespeed = 0x0071
         }
-
-        [StructLayout(LayoutKind.Sequential)]
-        private struct Win32Point
-        {
-            public int X;
-            public int Y;
-        };
     }
 }
