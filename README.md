@@ -7,12 +7,20 @@ It does this by automatically changing the pointer speed whenever the mouse trav
 ## Requirements
 
 - Windows 10
+- .NET Framework 4.6+
+- Two or more displays with different DPIs
 
 ## Installation
 
 Currently, there is no installer. To make practical use of this program, you could for example:
 
-  - build the solution
-  - copy the contents of `src\DpiGonzales\bin\debug` to `C:\Program Files\DpiGonzales`
+  - download the latest release from https://github.com/sandord/DpiGonzales/releases by clicking on the `DpiGonzales-portable.zip` file
+  - extract the contents of the downloaded .zip file to `C:\Program Files\DpiGonzales` or any other place on your hard drive you might prefer.
   - run `shell:startup` from the Windows Run dialog (<kbd>windows</kbd>+<kbd>R</kbd>)
-  - make a shortcut in the Explorer window that just opened and make it point to `C:\Program Files\DpiGonzales\DpiGonzales.exe`
+  - create a shortcut in the Explorer window that just opened and make it point to the `DpiGonzales.exe` file in the folder you extracted the downloaded .zip file to.
+
+You can now either reboot your machine or manually start the `DpiGonzales.exe` file/shortcut.
+
+The next time your machine boots, it should start DPI Gonzales automatically. Please keep in mind that Windows might wait a few seconds before starting DPI Gonzales.
+
+You can tell DPI Gonzales is running if you see the DPI Gonzales mouse icon in your tray bar.
