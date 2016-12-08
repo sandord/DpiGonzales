@@ -13,7 +13,7 @@ using System.Windows.Media;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("DPI Gonzales")]
-[assembly: AssemblyCopyright("Copyright © Subspace 2016")]
+[assembly: AssemblyCopyright("Copyright © Sandor Drieënhuizen 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
