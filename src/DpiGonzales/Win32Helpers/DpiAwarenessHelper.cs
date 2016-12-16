@@ -10,6 +10,7 @@ namespace DpiGonzales.Win32Helpers
             switch (SetProcessDpiAwareness(ProcessDpiAwareness.ProcessPerMonitorDpiAware))
             {
                 case EAccessDenied:
+                    // TODO: throw a custom exception type so the caller can specifically catch it.
                     throw new InvalidOperationException("Access denied.");
                 case SOk:
                     return true;

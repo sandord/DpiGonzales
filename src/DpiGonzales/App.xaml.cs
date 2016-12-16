@@ -28,9 +28,16 @@ namespace DpiGonzales
             _notifyIcon = (TaskbarIcon)FindResource("NotifyIcon");
 
             // By enabling DPI awareness after initially disabling it in AssemblyInfo, we can determine the per-display DPI.
-            if (!DpiAwarenessHelper.SetPerMonitorDpiAware())
+            try
             {
-                throw new InvalidOperationException("Failed to set per-monitor DPI awareness.");
+                if (!DpiAwarenessHelper.SetPerMonitorDpiAware())
+                {
+                    throw new InvalidOperationException("Failed to set per-monitor DPI awareness.");
+                }
+            }
+            catch (Exception exception)
+            {
+                //TODO: log/display exception as warning. Catch a custom exception type because currently we're ignoring exceptions to broadly.
             }
 
             // Get system mouse speed.
