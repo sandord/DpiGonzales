@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Threading;
 using DpiGonzales.Win32Helpers;
 using Hardcodet.Wpf.TaskbarNotification;
+using NLog;
 
 namespace DpiGonzales
 {
@@ -20,6 +21,18 @@ namespace DpiGonzales
         private int _systemMouseSpeed;
         private DispatcherTimer _dispatcherTimer;
         private IntPtr _currentDisplay = (IntPtr)0;
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        public App()
+        {
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledExceptionHandler;
+        }
+
+        private void CurrentDomain_UnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
+        {
+            Logger.Log(e.IsTerminating ? LogLevel.Fatal : LogLevel.Error, e.ExceptionObject);
+        }
 
         protected override void OnStartup(StartupEventArgs e)
         {
