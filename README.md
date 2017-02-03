@@ -1,8 +1,18 @@
 # DPI Gonzales
 
-This program mitigates an issue in Windows 10 with multi-display-DPI scenarios: perceived mouse speed differs by an uncomfortable amount traveling between high DPI displays and classic DPI displays.
+This program mitigates an issue in Windows 10 with multi-display-DPI scenarios: perceived pointer speed differs by an uncomfortable amount traveling between high DPI displays and classic DPI displays.
 
-It does this by automatically changing the pointer speed whenever the mouse travels to another monitor. The pointer speed is depending on the resolution, the DPI and Windows scaling settings of the display the mouse is on.
+It does this by automatically changing the pointer speed whenever the mouse travels to another monitor. The pointer speed is depending on the resolution, the DPI and Windows scaling settings of the display the pointer is on.
+
+# Usage Tips
+
+When DPI Gonzales starts, it detects your Windows pointer speed setting and uses it as its baseline. That's why you should tune your pointer speed through Windows when DPI Gonzales is not running.
+
+If you do change your pointer speed setting through Windows while DPI Gonzales is running, it will be overwritten as soon as you move your pointer to another display. When DPI Gonzales exits, it also restores your Windows pointer speed setting.
+
+DPI Gonzales works best if you set your mouse speed to the default setting (exactly halfway the slider) in Windows and keep the _Enhance pointer precision_ setting off.
+
+If you're the kind of person who prefers having _Enhance pointer precision_ enabled, you might want to tone down the mouse speed a bit because DPI Gonzales will be increasing the speed of your mouse on high DPI display(s) to get it to match the mouse speed on your low DPI display(s).
 
 ## Requirements
 
