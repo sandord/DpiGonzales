@@ -10,6 +10,7 @@
     <Grid Margin="10,10,10,10">
         <StackPanel Orientation="Vertical">
             <Label Content="DPI Gonzales" FontWeight="Bold" Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+            <Label x:Name="VersionLabel" Content="Version 1.0" Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
             <Label Content="Copyright 2016 Sandor Drieënhuizen" Margin="0,0,0,0"/>
             <Label Content="sandor@subspace.nl" Margin="0,0,0,0"/>
             <TextBox Margin="2,10,2,0" IsEnabled="False" TextWrapping="Wrap" FontStyle="Italic" BorderBrush="{x:Null}">

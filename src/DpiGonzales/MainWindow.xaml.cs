@@ -7,6 +7,8 @@ namespace DpiGonzales
         public MainWindow()
         {
             InitializeComponent();
+
+            VersionLabel.Content = $"v{GetType().Assembly.GetName().Version.ToString()}";
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
