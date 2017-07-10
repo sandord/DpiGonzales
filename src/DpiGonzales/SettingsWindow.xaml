@@ -1,0 +1,26 @@
+﻿<Window x:Class="DpiGonzales.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DpiGonzales"
+        mc:Ignorable="d"
+        Title="Settings" Height="351.435" Width="382.086" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" SnapsToDevicePixels="True"
+        Icon="App.ico" Loaded="Window_Loaded">
+    <Grid Margin="10,10,10,10">
+        <StackPanel Orientation="Vertical" Background="Transparent" Margin="0,0,10,0.333">
+            <StackPanel Orientation="Horizontal" Background="Transparent" Margin="0,0,0,6">
+                <Label Content="Refresh rate:" Width="100" ToolTip="Number of times per second to check if the mouse pointer has moved to another display" />
+                <Slider x:Name="RefreshRateSlider" Minimum="1" Maximum="120" Width="165" ValueChanged="RefreshRateSlider_ValueChanged" SmallChange="5" LargeChange="10" TickPlacement="BottomRight" TickFrequency="10" />
+                <Label x:Name="RefreshRateValue" Content="999 Hz" Width="50" HorizontalContentAlignment="Right" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Background="Transparent" Margin="0,0,0,6">
+                <Label Content="Speed ratio:" Width="100" ToolTip="Mouse speed to display DPI ratio (a higher value means your mouse will be sped up more on high DPI displays)" />
+                <Slider x:Name="MouseSpeedToDisplayDpiRatioSlider" Minimum="7" Maximum="16" Width="165" ValueChanged="MouseSpeedToDisplayDpiRatioSlider_ValueChanged" SmallChange="1" TickPlacement="BottomRight" IsDirectionReversed="True" Value="16" />
+                <Label x:Name="MouseSpeedToDisplayDpiRatioValue" Content="99" Width="50" HorizontalContentAlignment="Right" />
+            </StackPanel>
+        </StackPanel>
+
+        <Button x:Name="SaveButton" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Save" Width="80" Click="SaveButton_Click" />
+    </Grid>
+</Window>

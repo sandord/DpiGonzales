@@ -1,4 +1,4 @@
-﻿<Window x:Class="DpiGonzales.MainWindow"
+﻿<Window x:Class="DpiGonzales.AboutWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,7 +11,7 @@
         <StackPanel Orientation="Vertical" Background="Transparent">
             <Label Content="DPI Gonzales" FontWeight="Bold" Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
             <Label x:Name="VersionLabel" Content="Version 1.0" Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-            <Label Content="Copyright 2016 Sandor Drieënhuizen" Margin="0,0,0,0"/>
+            <Label Content="Copyright 2016-2017 Sandor Drieënhuizen" Margin="0,0,0,0"/>
             <TextBlock Margin="6,10,2,0" TextWrapping="Wrap">
                 <Button x:Name="LicenseButton" Padding="4,2,4,2" Click="LicenseButton_Click">View license details</Button>
             </TextBlock>

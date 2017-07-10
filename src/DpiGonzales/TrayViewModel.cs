@@ -23,9 +23,25 @@ namespace DpiGonzales
 
             CommandAction = () =>
             {
-                Application.Current.MainWindow = new MainWindow();
+                Application.Current.MainWindow = new AboutWindow();
                 Application.Current.MainWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 Application.Current.MainWindow.Show();
+            }
+        };
+
+        public ICommand ShowSettingsWindowCommand { get; } = new DelegateCommand
+        {
+            CanExecuteFunc = () => App.SettingsWindow == null || !App.SettingsWindow.IsVisible,
+
+            CommandAction = () =>
+            {
+                if (App.SettingsWindow == null || !App.SettingsWindow.IsLoaded)
+                {
+                    App.SettingsWindow = new SettingsWindow();
+                    App.SettingsWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                }
+
+                App.SettingsWindow.Show();
             }
         };
 
@@ -52,8 +68,8 @@ namespace DpiGonzales
 
         public event EventHandler CanExecuteChanged
         {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
         }
     }
 }

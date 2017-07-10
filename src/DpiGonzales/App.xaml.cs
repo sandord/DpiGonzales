@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Threading;
+using DpiGonzales.Properties;
 using DpiGonzales.Win32Helpers;
 using Hardcodet.Wpf.TaskbarNotification;
 using NLog;
@@ -13,9 +14,33 @@ namespace DpiGonzales
         private const int WindowsMinMouseSpeed = 0;
         private const int WindowsMaxMouseSpeed = 20;
 
-        // TODO: make these configurable.
-        private int RefreshRate = 60;
-        private float MouseSpeedToDisplayDpiRatio = 1 / 16f; // Increment mouse speed for every 16 dots above the reference dpi.
+        internal const float MinRefreshRate = 1;
+        internal const float MaxRefreshRate = 120;
+        private static int _refreshRate = 60;
+
+        internal const float MinMouseSpeedToDisplayDpiRatio = 7f;
+        internal const float MaxMouseSpeedToDisplayDpiRatio = 26f;
+        private static float _mouseSpeedToDisplayDpiRatio = 16f;
+        
+        internal static SettingsWindow SettingsWindow;
+
+        /// <summary>
+        /// Adjusts mouse speed n times per second.
+        /// </summary>
+        internal static int RefreshRate
+        {
+            get => _refreshRate;
+            set => _refreshRate = value >= MinRefreshRate && value <= MaxRefreshRate ? value : _refreshRate;
+        }
+
+        /// <summary>
+        /// Increments mouse speed for every n dots above the reference dpi.
+        /// </summary>
+        internal static float MouseSpeedToDisplayDpiRatio
+        {
+            get => _mouseSpeedToDisplayDpiRatio;
+            set => _mouseSpeedToDisplayDpiRatio = value >= MinMouseSpeedToDisplayDpiRatio && value <= MaxMouseSpeedToDisplayDpiRatio ? value : _mouseSpeedToDisplayDpiRatio;
+        }
 
         private TaskbarIcon _notifyIcon;
         private int _systemMouseSpeed;
@@ -27,6 +52,9 @@ namespace DpiGonzales
         public App()
         {
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledExceptionHandler;
+
+            RefreshRate = Settings.Default.RefreshRate;
+            MouseSpeedToDisplayDpiRatio = Settings.Default.MouseSpeedToDisplayDpiRatio;
         }
 
         private void CurrentDomain_UnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
@@ -81,7 +109,7 @@ namespace DpiGonzales
                 _currentDisplay = displayHandle;
 
                 var displayDpi = DisplayHelper.GetDpiForDisplay(displayHandle) ?? WindowsReferenceDpi;
-                var mouseSpeed = (int)Math.Floor(_systemMouseSpeed + (displayDpi - WindowsReferenceDpi) * MouseSpeedToDisplayDpiRatio);
+                var mouseSpeed = (int)Math.Floor(_systemMouseSpeed + (displayDpi - WindowsReferenceDpi) / MouseSpeedToDisplayDpiRatio);
                 mouseSpeed = Math.Min(Math.Max(mouseSpeed, WindowsMinMouseSpeed), WindowsMaxMouseSpeed);
 
                 // Use even values only, just like Windows Mouse Properties does.

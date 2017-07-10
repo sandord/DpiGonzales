@@ -6,11 +6,11 @@ using System.Windows;
 
 namespace DpiGonzales
 {
-    public partial class MainWindow : Window
+    public partial class AboutWindow : Window
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        public MainWindow()
+        public AboutWindow()
         {
             InitializeComponent();
 
