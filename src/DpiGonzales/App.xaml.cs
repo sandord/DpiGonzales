@@ -14,8 +14,8 @@ namespace DpiGonzales
         private const int WindowsMinMouseSpeed = 0;
         private const int WindowsMaxMouseSpeed = 20;
 
-        internal const float MinRefreshRate = 1;
-        internal const float MaxRefreshRate = 120;
+        internal const int MinRefreshRate = 1;
+        internal const int MaxRefreshRate = 120;
         private static int _refreshRate = 60;
 
         internal const float MinMouseSpeedToDisplayDpiRatio = 7f;
@@ -62,8 +62,15 @@ namespace DpiGonzales
             Logger.Log(e.IsTerminating ? LogLevel.Fatal : LogLevel.Error, e.ExceptionObject);
         }
 
+        private void App_OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            Logger.Error(e.Exception);
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
+            Logger.Info("Application starting");
+            
             base.OnStartup(e);
 
             _notifyIcon = (TaskbarIcon)FindResource("NotifyIcon");
@@ -78,13 +85,15 @@ namespace DpiGonzales
             }
             catch (Exception exception)
             {
-                //TODO: log/display exception as warning. Catch a custom exception type because currently we're ignoring exceptions to broadly.
+                Logger.Warn(exception.Message);
             }
 
             // Get system mouse speed.
             _systemMouseSpeed = MouseHelper.GetMouseSpeed();
 
             SetUpTimer();
+
+            Logger.Info("Application started");
         }
 
         protected override void OnExit(ExitEventArgs e)
