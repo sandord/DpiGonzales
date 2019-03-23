@@ -1,6 +1,6 @@
 # DPI Gonzales
 
-__NOTE:__ In the meantime, Microsoft has fixed the issue in Windows 10 production versions.
+__UPDATE:__ In the meantime, Microsoft has fixed the issue in Windows 10 production versions.
 
 This program mitigates an issue in Windows 10 with multi-display-DPI scenarios: perceived pointer speed differs by an uncomfortable amount traveling between high DPI displays and classic DPI displays.
 
