@@ -1,5 +1,7 @@
 # DPI Gonzales
 
+__NOTE:__ In the meantime, Microsoft has fixed the issue in Windows 10 production versions.
+
 This program mitigates an issue in Windows 10 with multi-display-DPI scenarios: perceived pointer speed differs by an uncomfortable amount traveling between high DPI displays and classic DPI displays.
 
 It does this by automatically changing the pointer speed whenever the mouse travels to another monitor. The pointer speed is depending on the resolution, the DPI and Windows scaling settings of the display the pointer is on.
